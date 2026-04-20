@@ -1,0 +1,19 @@
+CREATE TABLE showEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    genres TEXT NOT NULL,
+    language TEXT,
+    imageMedium TEXT,
+    imageOriginal TEXT,
+    rating REAL
+);
+
+getShows:
+SELECT * FROM showEntity;
+
+insertShow:
+INSERT OR REPLACE INTO showEntity(id, name, genres, language, imageMedium, imageOriginal, rating)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+deleteAll:
+DELETE FROM showEntity;
