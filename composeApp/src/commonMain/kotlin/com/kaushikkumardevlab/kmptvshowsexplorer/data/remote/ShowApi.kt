@@ -1,13 +1,16 @@
 package com.kaushikkumardevlab.kmptvshowsexplorer.data.remote
 
 import com.kaushikkumardevlab.kmptvshowsexplorer.core.network.NetworkConstants
+import com.kaushikkumardevlab.kmptvshowsexplorer.data.remote.dto.EpisodeDto
 import com.kaushikkumardevlab.kmptvshowsexplorer.data.remote.dto.SearchResponseDto
+import com.kaushikkumardevlab.kmptvshowsexplorer.data.remote.dto.ShowDetailDto
 import com.kaushikkumardevlab.kmptvshowsexplorer.data.remote.dto.ShowDto
 import com.kaushikkumardevlab.kmptvshowsexplorer.domain.model.Show
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.http.contentType
 
 class ShowApi(
     private val client: HttpClient
@@ -25,5 +28,17 @@ class ShowApi(
             parameter("q", query)
         }.body()
         //"https://api.tvmaze.com/search/shows?q=$query"
+    }
+
+    suspend fun getShowDetail(id: Int): ShowDetailDto {
+        return client.get("${NetworkConstants.SHOWS}/$id") {
+            contentType(io.ktor.http.ContentType.Application.Json)
+        }.body()
+    }
+
+    suspend fun getEpisodes(showId: Int): List<EpisodeDto> {
+        return client.get("${NetworkConstants.SHOWS}/$showId/episodes") {
+            contentType(io.ktor.http.ContentType.Application.Json)
+        }.body()
     }
 }

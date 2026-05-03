@@ -3,6 +3,8 @@ package com.kaushikkumardevlab.kmptvshowsexplorer
 import android.app.Application
 import com.kaushikkumardevlab.kmptvshowsexplorer.data.local.database.DatabaseDriverFactory
 import com.kaushikkumardevlab.kmptvshowsexplorer.di.appModule
+import io.github.aakira.napier.DebugAntilog
+import io.github.aakira.napier.Napier
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -12,7 +14,7 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        Napier.base(DebugAntilog())
         startKoin {
             androidContext(this@MainApplication)
             androidLogger()

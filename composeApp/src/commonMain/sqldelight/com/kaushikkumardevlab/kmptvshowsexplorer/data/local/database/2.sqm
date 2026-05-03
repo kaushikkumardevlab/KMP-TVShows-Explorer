@@ -1,0 +1,19 @@
+CREATE TABLE showDetailEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    summary TEXT,
+    genres TEXT NOT NULL,
+    language TEXT,
+    rating REAL,
+    imageUrl TEXT
+);
+
+CREATE TABLE episodeEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    showId INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    season INTEGER NOT NULL,
+    number INTEGER NOT NULL,
+    summary TEXT,
+    imageUrl TEXT
+);

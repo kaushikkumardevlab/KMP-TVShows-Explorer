@@ -4,7 +4,7 @@ import Shared
 
 struct ComposeView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        KoinHelper().createMainViewController()
+        MainViewController().createMainViewController()
     }
 
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}

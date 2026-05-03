@@ -1,0 +1,9 @@
+CREATE TABLE favoriteShowEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    genres TEXT NOT NULL,
+    language TEXT,
+    imageMedium TEXT,
+    imageOriginal TEXT,
+    rating REAL
+);

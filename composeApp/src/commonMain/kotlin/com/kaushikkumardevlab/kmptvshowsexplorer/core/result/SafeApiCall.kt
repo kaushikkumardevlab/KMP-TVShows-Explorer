@@ -6,7 +6,6 @@ suspend inline fun <T> safeApiCall(
     return try {
         Result.Success(apiCall())
     } catch (e: Exception) {
-
         Result.Error(
             message = e.message ?: "Unknown error"
         )

@@ -36,18 +36,18 @@ class ShowListViewModel(
             getShowsUseCase(nextKey)
         },
         getNextKey = { items ->
-            // Assuming the API uses page numbers, we just increment.
-            (_state.value.shows.size / 20) + 1 // Simple page increment logic
+            _state.value.page + 1
         },
         onError = { message ->
-            _state.update { it.copy(error = message, isLoading = false) }
+            _state.update { it.copy(errorMessage = message, isLoading = false) }
         },
         onSuccess = { items, newKey ->
             _state.update {
                 it.copy(
-                    shows = it.shows + items,
+                    shows = (it.shows + items).distinctBy { show -> show.id },
+                    page = newKey,
                     isLoading = false,
-                    error = null,
+                    errorMessage = null,
                     endReached = items.isEmpty()
                 )
             }
@@ -73,6 +73,7 @@ class ShowListViewModel(
      */
     fun onSearchQueryChange(query: String) {
         searchQuery.value = query
+        _state.update { it.copy(searchQuery = query) }
     }
 
     /**
@@ -107,14 +108,14 @@ class ShowListViewModel(
                     it.copy(
                         shows = result.data,
                         isLoading = false,
-                        error = null
+                        errorMessage = null
                     )
                 }
             }
             is Result.Error -> {
                 _state.update {
                     it.copy(
-                        error = result.message,
+                        errorMessage = result.message,
                         isLoading = false
                     )
                 }
@@ -128,6 +129,13 @@ class ShowListViewModel(
      */
     fun selectCategory(category: String) {
         viewModelScope.launch {
+            if (category == "All") {
+                _state.update { it.copy(selectedCategory = category) }
+                resetPagination()
+                loadNextPage()
+                return@launch
+            }
+
             _state.update { it.copy(isLoading = true, shows = emptyList()) }
 
             when (val result = getShowsByCategoryUseCase(category)) {
@@ -137,14 +145,14 @@ class ShowListViewModel(
                             selectedCategory = category,
                             shows = result.data,
                             isLoading = false,
-                            error = null
+                            errorMessage = null
                         )
                     }
                 }
                 is Result.Error -> {
                     _state.update {
                         it.copy(
-                            error = result.message,
+                            errorMessage = result.message,
                             isLoading = false
                         )
                     }
@@ -162,7 +170,7 @@ class ShowListViewModel(
         _state.update {
             it.copy(
                 shows = emptyList(),
-                error = null,
+                errorMessage = null,
                 endReached = false
             )
         }

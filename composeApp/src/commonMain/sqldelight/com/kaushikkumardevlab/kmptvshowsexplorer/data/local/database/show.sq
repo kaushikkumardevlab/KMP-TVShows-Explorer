@@ -8,6 +8,36 @@ CREATE TABLE showEntity (
     rating REAL
 );
 
+CREATE TABLE favoriteShowEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    genres TEXT NOT NULL,
+    language TEXT,
+    imageMedium TEXT,
+    imageOriginal TEXT,
+    rating REAL
+);
+
+CREATE TABLE showDetailEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    summary TEXT,
+    genres TEXT NOT NULL,
+    language TEXT,
+    rating REAL,
+    imageUrl TEXT
+);
+
+CREATE TABLE episodeEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    showId INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    season INTEGER NOT NULL,
+    number INTEGER NOT NULL,
+    summary TEXT,
+    imageUrl TEXT
+);
+
 getShows:
 SELECT * FROM showEntity;
 
@@ -17,3 +47,36 @@ VALUES (?, ?, ?, ?, ?, ?, ?);
 
 deleteAll:
 DELETE FROM showEntity;
+
+getFavoriteShows:
+SELECT * FROM favoriteShowEntity
+ORDER BY name COLLATE NOCASE ASC;
+
+getFavoriteShowById:
+SELECT * FROM favoriteShowEntity
+WHERE id = ?;
+
+insertFavoriteShow:
+INSERT OR REPLACE INTO favoriteShowEntity(id, name, genres, language, imageMedium, imageOriginal, rating)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+deleteFavoriteShow:
+DELETE FROM favoriteShowEntity
+WHERE id = ?;
+
+getShowDetail:
+SELECT * FROM showDetailEntity WHERE id = ?;
+
+insertShowDetail:
+INSERT OR REPLACE INTO showDetailEntity(id, name, summary, genres, language, rating, imageUrl)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+getEpisodesByShowId:
+SELECT * FROM episodeEntity WHERE showId = ? ORDER BY season ASC, number ASC;
+
+insertEpisode:
+INSERT OR REPLACE INTO episodeEntity(id, showId, name, season, number, summary, imageUrl)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+deleteEpisodesByShowId:
+DELETE FROM episodeEntity WHERE showId = ?;

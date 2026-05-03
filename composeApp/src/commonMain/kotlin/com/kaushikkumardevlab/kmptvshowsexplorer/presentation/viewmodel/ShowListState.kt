@@ -8,16 +8,17 @@ data class ShowListState(
     val searchQuery: String = "",
     val selectedCategory: String = "All",
     val categories: List<String> = listOf(
-        "All",
-        "Drama",
-        "Comedy",
-        "Action",
-        "Science-Fiction"
+        "All", "Drama", "Comedy", "Action", "Science-Fiction"
     ),
-
     val page: Int = 0,
     val isLoading: Boolean = false,
     val isRefreshing: Boolean = false,
     val endReached: Boolean = false,
-    val error: String? = null
-)
+    val errorMessage: String? = null
+) {
+    val isEmpty: Boolean
+        get() = shows.isEmpty() && !isLoading
+    val canLoadMore: Boolean
+        get() = !isLoading && !endReached
+
+}
