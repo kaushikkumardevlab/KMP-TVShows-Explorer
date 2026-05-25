@@ -25,7 +25,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 @Composable
 fun AppNavGraph(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     NavHost(
         navController = navController,
@@ -33,13 +33,11 @@ fun AppNavGraph(
         modifier = modifier.fillMaxSize()
     ) {
         composable(Routes.SPLASH) {
-            SplashScreen(
-                onNavigateToHome = {
-                    navController.navigate(Routes.SHOW_LIST) {
-                        popUpTo(Routes.SPLASH) { inclusive = true }
-                    }
+            SplashScreen {
+                navController.navigate(Routes.SHOW_LIST) {
+                    popUpTo(Routes.SPLASH) { inclusive = true }
                 }
-            )
+            }
         }
 
         composable(Routes.SHOW_LIST) {

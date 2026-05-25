@@ -16,6 +16,7 @@ import com.kaushikkumardevlab.kmptvshowsexplorer.domain.usecase.SearchShowsUseCa
 import com.kaushikkumardevlab.kmptvshowsexplorer.domain.usecase.ToggleFavoriteShowUseCase
 import com.kaushikkumardevlab.kmptvshowsexplorer.presentation.viewmodel.FavoriteShowsViewModel
 import com.kaushikkumardevlab.kmptvshowsexplorer.presentation.viewmodel.ShowListViewModel
+import com.kaushikkumardevlab.kmptvshowsexplorer.presentation.viewmodel.ThemeViewModel
 import com.kaushikkumardevlab.kmptvshowsexplorer.ui.screen.detail.ShowDetailViewModel
 import com.kaushikkumardevlab.kmptvshowsexplorer.data.local.database.ShowDatabase
 import io.ktor.client.HttpClient
@@ -71,6 +72,7 @@ val viewModelModule = module {
     factoryOf(::ShowListViewModel)
     factoryOf(::ShowDetailViewModel)
     factoryOf(::FavoriteShowsViewModel)
+    singleOf(::ThemeViewModel)
 }
 
 fun appModule() = listOf(

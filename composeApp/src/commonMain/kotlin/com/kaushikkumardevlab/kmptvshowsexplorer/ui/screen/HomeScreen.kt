@@ -19,7 +19,7 @@ import com.kaushikkumardevlab.kmptvshowsexplorer.ui.component.ShowItem
 @Composable
 fun HomeScreen(
     viewModel: ShowListViewModel,
-    onShowClick: (Int) -> Unit
+    onShowClick: (Int) -> Unit,
 ) {
     val state by viewModel.state.collectAsState()
 
@@ -51,7 +51,7 @@ fun HomeScreen(
         ) {
             itemsIndexed(state.shows, key = { _, show -> show.id }) { index, show ->
                 // Trigger pagination when reaching end of list
-                if (index >= state.shows.size - 5 && !state.endReached && !state.isLoading) {
+                if (index >= (state.shows.size - 5) && !state.endReached && !state.isLoading) {
                     viewModel.loadNextPage()
                 }
                 ShowItem(
