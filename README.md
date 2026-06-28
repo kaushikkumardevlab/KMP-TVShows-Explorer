@@ -11,6 +11,33 @@ A cross-platform TV Shows Explorer application built with **Kotlin Multiplatform
 - **Offline Favorites:** Save shows locally to view them even without an internet connection.
 - **Cross-Platform Navigation:** Unified navigation structure that supports platform-specific UI customizations.
 
+## Android Showcase
+
+<table>
+  <tr>
+    <td align="center"><strong>Shows</strong></td>
+    <td align="center"><strong>Search</strong></td>
+    <td align="center"><strong>Categories</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/android/android-shows-list.png" alt="Android shows list screen" width="220"/></td>
+    <td><img src="docs/screenshots/android/android-search-results.png" alt="Android search results screen" width="220"/></td>
+    <td><img src="docs/screenshots/android/android-categories.png" alt="Android categories screen" width="220"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Saved</strong></td>
+    <td align="center"><strong>Show Detail</strong></td>
+    <td align="center"><strong>iOS Showcase</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/android/android-saved-favorites.png" alt="Android saved favorites screen" width="220"/></td>
+    <td><img src="docs/screenshots/android/android-show-detail.png" alt="Android show detail screen" width="220"/></td>
+    <td align="center">Coming soon</td>
+  </tr>
+</table>
+
+See the full Android gallery in [docs/android-showcase.md](docs/android-showcase.md).
+
 ## 🚀 Tech Stack
 - **UI:** Compose Multiplatform (Jetpack Compose for both Android and iOS)
 - **Dependency Injection:** Koin (v4.0.0)
